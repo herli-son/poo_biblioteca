@@ -1,11 +1,18 @@
 package view;
 
 import javax.swing.*;
+
+import Biblioteca.Obras;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ListarAcervo extends JFrame {
-    private JList<String> listAcervo;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JList<String> listAcervo;
     private JButton btnVisualizar;
 
     public ListarAcervo() {
@@ -18,16 +25,17 @@ public class ListarAcervo extends JFrame {
         panel.setLayout(null);
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        listModel.addElement("Livro 1");
-        listModel.addElement("Livro 2");
-        listModel.addElement("Livro 3");
+        for (String item : Obras.Listar()) {
+        	listModel.addElement(item);
+		}
+
 
         listAcervo = new JList<>(listModel);
         listAcervo.setBounds(10, 10, 260, 100);
         panel.add(listAcervo);
 
         btnVisualizar = new JButton("Visualizar");
-        btnVisualizar.setBounds(10, 120, 100, 25);
+        btnVisualizar.setBounds(91, 121, 100, 25);
         panel.add(btnVisualizar);
 
         btnVisualizar.addActionListener(new ActionListener() {
@@ -42,6 +50,6 @@ public class ListarAcervo extends JFrame {
             }
         });
 
-        add(panel);
+        getContentPane().add(panel);
     }
 }

@@ -1,6 +1,7 @@
 package Biblioteca;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Obras implements DAO, Serializable {
@@ -79,34 +80,27 @@ public abstract class Obras implements DAO, Serializable {
 	public boolean podeExcluir() {
 		return false;
 	}
-	public static void Listar() {
+	public static List<String> Listar() {
 		List<Object> lista = DAO.lerTudo("Audio");
-		System.out.println("--------------------");
-		System.out.println("Audios: ");
-		System.out.println("--------------------");
+		List<String> listaConteudo = new ArrayList<String>();
 		for (Object object : lista) {
 			Audio a = (Audio) object;
-			System.out.println(a.toString());
+			listaConteudo.add(a.toString());
 		}
 		
 		lista = DAO.lerTudo("Fotografia");
-		System.out.println("--------------------");
-		System.out.println("Fotografias: ");
-		System.out.println("--------------------");
 		for (Object object : lista) {
 			Fotografia f = (Fotografia) object;
-			System.out.println(f.toString());
+			listaConteudo.add(f.toString());
 		}
 		
 		lista = DAO.lerTudo("Livro");
-		System.out.println("--------------------");
-		System.out.println("Livros: ");
-		System.out.println("--------------------");
 		for (Object object : lista) {
 			Livro l = (Livro) object;
-			System.out.println(l.toString());
+			listaConteudo.add(l.toString());
 		}
-		System.out.println("--------------------");
+		
+		return listaConteudo;
 	}
 	@Override
 	public String toString() {

@@ -88,10 +88,12 @@ public abstract class Solicitacao implements DAO, Serializable {
 		
 		return solicitacoes;
 	}
-	public static void ListarSolicitacoes(List<Solicitacao> solicitacoes) {
+	public static List<String> ListarSolicitacoes(List<Solicitacao> solicitacoes) {
+		List<String> listaSolicitacao = new ArrayList<String>();
 		for (Solicitacao solicitacao : solicitacoes) {
-			System.out.println(solicitacao.getClass().getSimpleName() + " | " + solicitacao.getObra().getTitulo()
+			listaSolicitacao.add(solicitacao.getClass().getSimpleName() + " | " + solicitacao.getObra().getTitulo()
 					+ " - " + solicitacao.getUsuario().getAcesso());
 		}
+		return listaSolicitacao;
 	}
 }

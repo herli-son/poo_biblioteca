@@ -1,14 +1,22 @@
 package view;
 
 import javax.swing.*;
+
+import Biblioteca.Solicitacao;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ListarReservas extends JFrame {
-    private JList<String> listReservas;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JList<String> listReservas;
     private JButton btnVisualizar;
 
-    public ListarReservas() {
+    public ListarReservas(ArrayList<Solicitacao> reserva) {
         setTitle("Listar Reservas");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -18,9 +26,9 @@ public class ListarReservas extends JFrame {
         panel.setLayout(null);
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        listModel.addElement("Reserva 1");
-        listModel.addElement("Reserva 2");
-        listModel.addElement("Reserva 3");
+        for (String item : Solicitacao.ListarSolicitacoes(reserva)) {
+			listModel.addElement(item);
+		}
 
         listReservas = new JList<>(listModel);
         listReservas.setBounds(10, 10, 260, 100);

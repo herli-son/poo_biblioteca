@@ -5,7 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AcessarObraDigital extends JFrame {
-    private JList<String> listObrasDigitais;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JList<String> listObrasDigitais;
     private JButton btnAcessar;
 
     public AcessarObraDigital() {
@@ -23,6 +27,7 @@ public class AcessarObraDigital extends JFrame {
         listModel.addElement("Obra Digital 3");
 
         listObrasDigitais = new JList<>(listModel);
+        listObrasDigitais.setToolTipText("");
         listObrasDigitais.setBounds(10, 10, 260, 100);
         panel.add(listObrasDigitais);
 
@@ -43,6 +48,6 @@ public class AcessarObraDigital extends JFrame {
             }
         });
 
-        add(panel);
+        getContentPane().add(panel);
     }
 }

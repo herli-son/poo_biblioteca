@@ -1,14 +1,21 @@
 package view;
 
 import javax.swing.*;
+import Biblioteca.Solicitacao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListarEmprestimos extends JFrame {
-    private JList<String> listEmprestimos;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JList<String> listEmprestimos;
     private JButton btnVisualizar;
 
-    public ListarEmprestimos() {
+    public ListarEmprestimos(ArrayList<Solicitacao> emprestimo) {
         setTitle("Listar Empréstimos");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -18,9 +25,9 @@ public class ListarEmprestimos extends JFrame {
         panel.setLayout(null);
 
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        listModel.addElement("Empréstimo 1");
-        listModel.addElement("Empréstimo 2");
-        listModel.addElement("Empréstimo 3");
+        for (String item : Solicitacao.ListarSolicitacoes(emprestimo)) {
+			listModel.addElement(item);
+		}
 
         listEmprestimos = new JList<>(listModel);
         listEmprestimos.setBounds(10, 10, 260, 100);

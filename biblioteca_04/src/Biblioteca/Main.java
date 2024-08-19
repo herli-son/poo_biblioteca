@@ -24,7 +24,7 @@ public class Main {
 		while (true) {
 			switch (MenuAcesso()) {
 			case 1:
-				CadastrarUsuarios();
+				CadastrarUsuario();
 				break;
 			case 2:
 				if (Acessar())
@@ -101,7 +101,7 @@ public class Main {
 						Solicitacao.ListarSolicitacoes(UsuarioLogado.getSolicitacoes());
 					else
 						Solicitacao.ListarSolicitacoes(Solicitacao.Solicitacoes());
-						
+
 					break;
 				case 7:
 					if (!UsuarioLogado.getClass().getSimpleName().equals("Funcionario"))
@@ -123,41 +123,41 @@ public class Main {
 		}
 	}
 
-	public static void CadastrarUsuarios() {
-		while (true) {
-			try {
-				System.out.println("1 - Estudante");
-				System.out.println("2 - Funcionario");
-				System.out.println("3 - Professor");
-				System.out.println("4 - Voltar");
+//	public static void CadastrarUsuarios() {
+//		while (true) {
+//			try {
+//				System.out.println("1 - Estudante");
+//				System.out.println("2 - Funcionario");
+//				System.out.println("3 - Professor");
+//				System.out.println("4 - Voltar");
+//
+//				switch (LerOpcao()) {
+//				case 1:
+//					CadastrarEstudante(CadastrarUsuario());
+//					break;
+//				case 2:
+//					CadastrarFuncionario(CadastrarUsuario());
+//					break;
+//				case 3:
+//					CadastrarProfessor(CadastrarUsuario());
+//					break;
+//				case 4:
+//					return;
+//				default:
+//					System.out.println("Opção inválida!");
+//					break;
+//				}
+//				System.out.println(Id.toString());
+//
+//			} catch (Exception e) {
+//				System.out.println("Somente números!");
+//			}
+//		}
+//	}
 
-				switch (LerOpcao()) {
-				case 1:
-					CadastrarEstudante(CadastrarUsuario());
-					break;
-				case 2:
-					CadastrarFuncionario(CadastrarUsuario());
-					break;
-				case 3:
-					CadastrarProfessor(CadastrarUsuario());
-					break;
-				case 4:
-					return;
-				default:
-					System.out.println("Opção inválida!");
-					break;
-				}
-				System.out.println(Id.toString());
+	public static String[] CadastrarUsuario(String nome, String Idade, String Sexo, String Telefone, String acesso,
+			String senha, int tipo) {
 
-			} catch (Exception e) {
-				System.out.println("Somente números!");
-			}
-		}
-	}
-
-	private static String[] CadastrarUsuario() {
-
-		String acesso;
 		do {
 			acesso = LerDado("Acesso");
 
@@ -168,11 +168,22 @@ public class Main {
 
 		} while (true);
 
-		return new String[] { LerDado("Nome"), LerDado("Idade"), LerDado("Sexo"), LerDado("Telefone"), acesso,
-				LerDado("Senha") };
+		switch (tipo) {
+		case 0:
+			CadastrarEstudante(new String[] { nome, Idade, Sexo, Telefone, acesso, senha });
+			break;
+		case 1:
+			CadastrarFuncionario(new String[] { nome, Idade, Sexo, Telefone, acesso, senha });
+			break;
+		case 2:
+			CadastrarProfessor(new String[] { nome, Idade, Sexo, Telefone, acesso, senha });
+		}
+
+		return new String[] { nome, Idade, Sexo, Telefone, acesso, senha };
 	}
 
 	private static void CadastrarEstudante(String[] usuario) {
+
 		String[] dados = { LerDado("Curso"), LerDado("Período") };
 		Estudante estudante = new Estudante();
 		estudante.setNome(usuario[0]);
@@ -455,15 +466,15 @@ public class Main {
 				else {
 					Livro livro = new Livro();
 					livro = (Livro) livro.ler();
-					
+
 					List<Solicitacao> solicitacoes = usuario.getSolicitacoes();
 					Emprestimo emprestimo = usuario.getEmprestimos().get(i);
-					
+
 					solicitacoes.remove(emprestimo);
 					usuario.setSolicitacoes(solicitacoes);
-					
+
 					solicitacoes = livro.getSolicitacoes();
-					
+
 					solicitacoes.remove(emprestimo);
 					livro.setSolicitacoes(solicitacoes);
 
@@ -473,7 +484,7 @@ public class Main {
 
 					if (livro.getProximaReserva() != null) {
 						EmprestarLivro((Livro) livro.getProximaReserva().getObra(),
-						livro.getProximaReserva().getUsuario());
+								livro.getProximaReserva().getUsuario());
 						Reserva reserva = livro.getProximaReserva();
 						reserva.excluir();
 						solicitacoes.remove(reserva);
@@ -493,10 +504,8 @@ public class Main {
 	}
 
 	private static String LerDado(String mensagem) {
-		Scanner In = new Scanner(System.in);
-		System.out.println("--------------------");
-		System.out.println(mensagem + ": ");
-		return In.nextLine();
+		return JOptionPane.showInputDialog(mensagem);
+
 	}
 
 	private static int LerOpcao() {

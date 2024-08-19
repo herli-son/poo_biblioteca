@@ -5,7 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Login extends JFrame {
-    private JTextField txtUsuario;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextField txtAcesso;
     private JPasswordField txtSenha;
     private JButton btnLogin;
 
@@ -18,13 +22,13 @@ public class Login extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        JLabel lblUsuario = new JLabel("Usuário:");
-        lblUsuario.setBounds(10, 10, 80, 25);
-        panel.add(lblUsuario);
+        JLabel lblAcesso = new JLabel("Acesso:");
+        lblAcesso.setBounds(10, 10, 80, 25);
+        panel.add(lblAcesso);
 
-        txtUsuario = new JTextField(20);
-        txtUsuario.setBounds(100, 10, 160, 25);
-        panel.add(txtUsuario);
+        txtAcesso = new JTextField(20);
+        txtAcesso.setBounds(100, 10, 160, 25);
+        panel.add(txtAcesso);
 
         JLabel lblSenha = new JLabel("Senha:");
         lblSenha.setBounds(10, 40, 80, 25);
@@ -42,7 +46,7 @@ public class Login extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Lógica de autenticação
-                String usuario = txtUsuario.getText();
+                String usuario = txtAcesso.getText();
                 String senha = new String(txtSenha.getPassword());
 
                 if (usuario.equals("admin") && senha.equals("admin")) {
